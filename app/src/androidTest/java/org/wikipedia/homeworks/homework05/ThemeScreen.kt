@@ -40,19 +40,19 @@ class ThemeScreen  {
         withText(R.string.color_theme_select)
     }
 
-    val buttonThemeLight = KTextView {
+    val buttonThemeLight = KButton {
         withId(R.id.button_theme_light)
     }
 
-    val buttonThemeDark = KTextView {
+    val buttonThemeDark = KButton {
         withId(R.id.button_theme_dark)
     }
 
-    val buttonThemeSepia = KTextView {
+    val buttonThemeSepia = KButton {
         withId(R.id.button_theme_sepia)
     }
 
-    val buttonThemeBlack = KTextView {
+    val buttonThemeBlack = KButton {
         withId(R.id.button_theme_black)
     }
 
