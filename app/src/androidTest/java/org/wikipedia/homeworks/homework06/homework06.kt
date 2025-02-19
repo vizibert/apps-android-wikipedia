@@ -2,7 +2,6 @@ package org.wikipedia.homeworks.homework06
 
 import org.hamcrest.CoreMatchers.*
 import org.hamcrest.Description
-import org.hamcrest.Matcher
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.TypeSafeMatcher
 
@@ -80,53 +79,27 @@ class InvalidLengthMatcher() : TypeSafeMatcher<Shape>() {
     }
 }
 
-//fun hasValidLengthRange() = LengthRangeMatcher(0.1f, 30f)
-//
-//fun isLine() = LineMatcher()
-//
-//fun hasAngles() = AnglesMatcher()
-//
-//fun hasEvenSides() = EvenSidesMatcher()
-//
-//fun hasColor(color: Color) = ColorMatcher(color)
-//
-//fun hasInvalidSidesCount() = InvalidSidesCountMatcher()
-//
-//fun hasInvalidLength() = InvalidLengthMatcher()
+fun hasValidLengthRange() = LengthRangeMatcher(0.1f, 30f)
 
-class MatcherBuilder {
-    private val matchers = mutableListOf<Matcher<Shape>>()
+fun isLine() = LineMatcher()
 
-    operator fun invoke(function: MatcherBuilder.() -> Unit) {
-        function()
-    }
+fun hasAngles() = AnglesMatcher()
 
-    fun hasValidLengthRange(min: Float, max: Float) = matchers.add(LengthRangeMatcher(min, max))
+fun hasEvenSides() = EvenSidesMatcher()
 
-    fun isLine() = matchers.add(LineMatcher())
+fun hasColor(color: Color) = ColorMatcher(color)
 
-    fun hasAngles() = matchers.add(AnglesMatcher())
+fun hasInvalidSidesCount() = InvalidSidesCountMatcher()
 
-    fun hasEvenSides() = matchers.add(EvenSidesMatcher())
-
-    fun hasColor(color: Color) = matchers.add(ColorMatcher(color))
-
-    fun hasInvalidSidesCount() = matchers.add(InvalidSidesCountMatcher())
-
-    fun hasInvalidLength() = matchers.add(InvalidLengthMatcher())
-
-    fun buildAllMatchers(): Matcher<Shape> = allOf(matchers)
-
-    fun buildAnyMatchers(): Matcher<Shape> = anyOf(matchers)
-}
+fun hasInvalidLength() = InvalidLengthMatcher()
 
 fun main() {
 
-//    val triangle = Shape(10f, 3, Color.RED)
-//
-//    assertThat(triangle, hasAngles())
-//    assertThat(triangle, not(hasEvenSides()))
-//    assertThat(triangle, hasColor(Color.RED))
+    val triangle = Shape(10f, 3, Color.RED)
+
+    assertThat(triangle, hasAngles())
+    assertThat(triangle, not(hasEvenSides()))
+    assertThat(triangle, hasColor(Color.RED))
 
     val shapes = listOf(
         Shape(10f, 1, Color.RED), Shape(5f, 4, Color.BLUE), Shape(7f, 2, Color.GREEN),
@@ -138,88 +111,56 @@ fun main() {
         Shape(40f, 18, Color.RED), Shape(50f, 20, Color.BLUE), Shape(-1f, 3, Color.GREEN)
     )
 
-//    val lineMatchers = allOf(
-//        hasValidLengthRange(),
-//        isLine()
-//    )
-//
-//    val filteredLines = shapes.filter { lineMatchers.matches(it) }
-//
-//    println("Lines: $filteredLines")
-//
-//    val shapesWithAnglesMatcher = allOf(
-//        hasAngles(),
-//        hasValidLengthRange()
-//    )
-//
-//    val filteredTriangles = shapes.filter { shapesWithAnglesMatcher.matches(it) }
-//
-//    println("Shapes with angles: $filteredTriangles")
-//
-//    val invalidShapesMatchers = anyOf(
-//        hasInvalidLength(),
-//        hasInvalidSidesCount()
-//    )
-//
-//    val filteredInvalidShapes = shapes.filter { invalidShapesMatchers.matches(it) }
-//
-//    println("Invalid shapes: $filteredInvalidShapes")
-//
-//    val outOfRangeShapesMatcher = allOf(
-//        not(hasValidLengthRange()),
-//        not(hasInvalidLength())
-//    )
-//
-//    val filteredOutOfRangeShapes = shapes.filter { outOfRangeShapesMatcher.matches(it) }
-//
-//    println("Out of range shapes: $filteredOutOfRangeShapes")
-//
-//    val redShapes = hasColor(Color.RED)
-//
-//    val filteredRedShapes = shapes.filter { redShapes.matches(it) }
-//
-//    println("Red shapes: $filteredRedShapes")
-//
-//    val customFilter = shapes.filter { allOf(
-//        hasValidLengthRange(),
-//        hasAngles(),
-//        hasEvenSides(),
-//        hasColor(Color.BLUE),
-//        not(hasInvalidSidesCount()),
-//        not(hasInvalidLength())
-//    ).matches(it) }
-//
-//    println("Custom filter:$customFilter")
-
-
-    // Matcher builder
-    val builderForLines = MatcherBuilder()
-
-    builderForLines {
-        hasValidLengthRange(0.1f, 30f)
+    val lineMatchers = allOf(
+        hasValidLengthRange(),
         isLine()
-    }
+    )
 
-    val filteredLines = shapes.filter { builderForLines.buildAllMatchers().matches(it) }
+    val filteredLines = shapes.filter { lineMatchers.matches(it) }
+
     println("Lines: $filteredLines")
 
-    val builderForRedShapes = MatcherBuilder()
+    val shapesWithAnglesMatcher = allOf(
+        hasAngles(),
+        hasValidLengthRange()
+    )
 
-    builderForRedShapes {
-        hasColor(Color.RED)
-    }
+    val filteredTriangles = shapes.filter { shapesWithAnglesMatcher.matches(it) }
 
-    val filteredRedShapes = shapes.filter { builderForRedShapes.buildAllMatchers().matches(it) }
-    println("Red shapes: $filteredRedShapes")
+    println("Shapes with angles: $filteredTriangles")
 
-    val builderForInvalidShapes = MatcherBuilder()
-
-    builderForInvalidShapes {
-        hasInvalidLength()
+    val invalidShapesMatchers = anyOf(
+        hasInvalidLength(),
         hasInvalidSidesCount()
-    }
+    )
 
-    val filteredInvalidShapes = shapes.filter { builderForInvalidShapes.buildAnyMatchers().matches(it) }
+    val filteredInvalidShapes = shapes.filter { invalidShapesMatchers.matches(it) }
 
     println("Invalid shapes: $filteredInvalidShapes")
+
+    val outOfRangeShapesMatcher = allOf(
+        not(hasValidLengthRange()),
+        not(hasInvalidLength())
+    )
+
+    val filteredOutOfRangeShapes = shapes.filter { outOfRangeShapesMatcher.matches(it) }
+
+    println("Out of range shapes: $filteredOutOfRangeShapes")
+
+    val redShapes = hasColor(Color.RED)
+
+    val filteredRedShapes = shapes.filter { redShapes.matches(it) }
+
+    println("Red shapes: $filteredRedShapes")
+
+    val customFilter = shapes.filter { allOf(
+        hasValidLengthRange(),
+        hasAngles(),
+        hasEvenSides(),
+        hasColor(Color.BLUE),
+        not(hasInvalidSidesCount()),
+        not(hasInvalidLength())
+    ).matches(it) }
+
+    println("Custom filter:$customFilter")
 }
