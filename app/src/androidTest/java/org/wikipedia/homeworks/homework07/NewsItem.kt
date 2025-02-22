@@ -6,7 +6,6 @@ import io.github.kakaocup.kakao.recycler.KRecyclerView
 import io.github.kakaocup.kakao.text.KTextView
 import org.hamcrest.Matcher
 import org.wikipedia.R
-import org.wikipedia.feed.news.NewsItem
 
 class NewsItem(matcher: Matcher<View>) : KRecyclerItem<NewsItem>(matcher) {
 
