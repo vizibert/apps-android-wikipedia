@@ -22,6 +22,7 @@ object ExploreScreen : KScreen<ExploreScreen>() {
             itemType(::SearchBarItem)
             itemType(::AnnouncementItem)
             itemType(::DayHeaderItem)
+            itemType(::FeaturedArticleItem)
             itemType(::TopReadItem)
             itemType(::NewsItem)
         }
