@@ -2,6 +2,8 @@ package org.wikipedia.homeworks.homework08
 
 import androidx.compose.ui.test.hasText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
+import com.kaspersky.components.alluresupport.withForcedAllureSupport
+import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import io.github.kakaocup.kakao.recycler.KEmptyRecyclerItem
 import org.wikipedia.main.MainActivity
@@ -11,7 +13,7 @@ import org.wikipedia.R
 import org.wikipedia.homeworks.homework07.ExploreScreen
 
 
-class OnboardingTest : TestCase() {
+class OnboardingTest : TestCase(Kaspresso.Builder.withForcedAllureSupport()) {
 
     @get:Rule
     val activityScenarioRule: ActivityScenarioRule<MainActivity> =

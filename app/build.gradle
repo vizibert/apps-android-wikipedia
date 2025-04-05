@@ -265,6 +265,8 @@ dependencies {
     // Kaspresso library for UI testing
     androidTestImplementation libs.kaspresso
     androidTestUtil libs.androidx.orchestrator
+    androidTestImplementation libs.kaspresso.allure.support
+
 
     // Compose Library
     def composeBom = platform(libs.composeBom)
@@ -300,4 +302,42 @@ private static Properties loadProperties(File file) {
         System.err.println "\"${file}\" not found"
     }
     return props
+}
+
+// В файле build.gradle (уровня модуля или проекта)
+tasks.register("deleteLocalAllureResults", Delete) {
+    group = "verification"
+    description = "Deletes local allure-results directory"
+
+    def targetDir = file("build/allure-results")
+    delete targetDir
+}
+
+tasks.register("pullAllureResults", Exec) {
+    group = "verification"
+    description = "Pulls allure-results from device to app/build"
+
+    dependsOn tasks.named("deleteLocalAllureResults")
+
+    def adbCommand = ["adb", "pull", "/sdcard/Documents/allure-results", "build"]
+    commandLine adbCommand
+
+    ignoreExitValue true
+}
+
+tasks.register("clearDeviceAllureResults", Exec) {
+    group = "verification"
+    description = "Clears allure-results directory on Android device"
+
+    def adbCommand = ["adb", "shell", "rm", "-rf", "/sdcard/Documents/allure-results"]
+    commandLine adbCommand
+
+    ignoreExitValue true
+}
+
+tasks.withType(com.android.build.gradle.internal.tasks.AndroidTestTask).configureEach { Task task ->
+    if (task.name.toLowerCase().startsWith("connected") && task.name.toLowerCase().endsWith("androidtest")) {
+        task.dependsOn tasks.named("clearDeviceAllureResults")
+        task.finalizedBy tasks.named("pullAllureResults")
+    }
 }
