@@ -400,6 +400,8 @@ class OnboardingDeviceTests : TestCase() {
                 ArticleZeroScreen.retryBtn.click()
             }
 
+            Thread.sleep(2_000)
+
             step("Check that article screen is displayed") {
                 ArticleScreen.pageVW.isDisplayed()
             }
