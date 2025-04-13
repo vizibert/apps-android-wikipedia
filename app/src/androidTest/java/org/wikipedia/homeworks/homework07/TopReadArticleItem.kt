@@ -6,12 +6,14 @@ import io.github.kakaocup.kakao.recycler.KRecyclerItem
 import io.github.kakaocup.kakao.text.KTextView
 import org.hamcrest.Matcher
 import org.wikipedia.R
+import org.wikipedia.homeworks.homeworks20.name
+import org.wikipedia.homeworks.homeworks20.withParent
 
 class TopReadArticleItem(matcher : Matcher<View>) : KRecyclerItem<TopReadItem>(matcher)  {
 
     val number = KTextView(matcher) {
         withId(R.id.numberView)
-    }
+    }.name(withParent("Номер"))
 
     val title = KTextView(matcher) {
         withId(R.id.view_list_card_item_title)

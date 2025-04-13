@@ -9,7 +9,7 @@ import io.github.kakaocup.kakao.common.assertions.BaseAssertions
 import io.github.kakaocup.kakao.edit.EditableActions
 import io.github.kakaocup.kakao.text.TextViewAssertions
 
-class Steps( val testContext: TestContext<*>) {
+class Steps(val testContext: TestContext<*>) {
 
     operator fun invoke(block: Steps.() -> Unit) {
         block()

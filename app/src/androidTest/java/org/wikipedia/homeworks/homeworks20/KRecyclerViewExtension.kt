@@ -1,0 +1,16 @@
+package org.wikipedia.homeworks.homeworks20
+
+import io.github.kakaocup.kakao.recycler.KRecyclerItem
+import io.github.kakaocup.kakao.recycler.KRecyclerView
+
+inline fun <reified T : KRecyclerItem<*>> KRecyclerView.invokeAtIndex(
+    index: Int,
+    function: T.() -> Unit
+) {
+    val recycler = this
+
+    childAt<T>(index) {
+        name(recycler.getName().withParent("$index"))
+        function()
+    }
+}
