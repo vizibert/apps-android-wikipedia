@@ -21,19 +21,21 @@ object ExploreScreenNamed : NamedKScreen<ExploreScreenNamed>() {
             .name(withParent("Заголовок"))
     }
 
-    val items = KRecyclerView(
-        builder = {
-            withId(R.id.feed_view)
-        },
-        itemTypeBuilder = {
-            itemType(::SearchBarItem)
-            itemType(::AnnouncementItem)
-            itemType(::DayHeaderItem)
-            itemType(::FeaturedArticleItem)
-            itemType(::TopReadItem)
-            itemType(::NewsItem)
-        }
-    ).name(withParent("Список блоков"))
+    val items by lazy {
+        KRecyclerView(
+            builder = {
+                withId(R.id.feed_view)
+            },
+            itemTypeBuilder = {
+                itemType(::SearchBarItem)
+                itemType(::AnnouncementItem)
+                itemType(::DayHeaderItem)
+                itemType(::FeaturedArticleItem)
+                itemType(::TopReadItem)
+                itemType(::NewsItem)
+            }
+        ).name(withParent("Список блоков"))
+    }
 
     fun topReadItem(index: Int, function: TopReadItem.() -> Unit) {
         items.invokeAtIndex(index, function)

@@ -9,11 +9,13 @@ import org.wikipedia.R
 import org.wikipedia.homeworks.homeworks20.name
 import org.wikipedia.homeworks.homeworks20.withParent
 
-class TopReadArticleItem(matcher : Matcher<View>) : KRecyclerItem<TopReadItem>(matcher)  {
+class TopReadArticleItem(matcher : Matcher<View>) : KRecyclerItem<TopReadArticleItem>(matcher)  {
 
-    val number = KTextView(matcher) {
-        withId(R.id.numberView)
-    }.name(withParent("Номер"))
+    val number by lazy {
+        KTextView(matcher) {
+            withId(R.id.numberView)
+        }.name(withParent("Номер"))
+    }
 
     val title = KTextView(matcher) {
         withId(R.id.view_list_card_item_title)
@@ -25,6 +27,7 @@ class TopReadArticleItem(matcher : Matcher<View>) : KRecyclerItem<TopReadItem>(m
 
     val graph = KImageView(matcher) {
         withId(R.id.view_list_card_item_graph)
+
     }
 
     val views = KTextView(matcher) {
