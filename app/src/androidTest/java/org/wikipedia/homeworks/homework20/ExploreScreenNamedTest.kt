@@ -1,10 +1,9 @@
-package org.wikipedia.homeworks.homeworks20
+package org.wikipedia.homeworks.homework20
 
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.kaspersky.components.alluresupport.withForcedAllureSupport
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
-import io.github.kakaocup.kakao.screen.Screen
 import org.junit.Rule
 import org.junit.Test
 import org.wikipedia.main.MainActivity

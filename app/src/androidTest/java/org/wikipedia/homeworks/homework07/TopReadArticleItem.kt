@@ -6,8 +6,8 @@ import io.github.kakaocup.kakao.recycler.KRecyclerItem
 import io.github.kakaocup.kakao.text.KTextView
 import org.hamcrest.Matcher
 import org.wikipedia.R
-import org.wikipedia.homeworks.homeworks20.name
-import org.wikipedia.homeworks.homeworks20.withParent
+import org.wikipedia.homeworks.homework20.name
+import org.wikipedia.homeworks.homework20.withParent
 
 class TopReadArticleItem(matcher : Matcher<View>) : KRecyclerItem<TopReadArticleItem>(matcher)  {
 

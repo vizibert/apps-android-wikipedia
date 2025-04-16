@@ -1,6 +1,5 @@
-package org.wikipedia.homeworks.homeworks20
+package org.wikipedia.homeworks.homework20
 
-import androidx.test.espresso.matcher.ViewMatchers.withId
 import io.github.kakaocup.kakao.text.KTextView
 import org.wikipedia.R
 

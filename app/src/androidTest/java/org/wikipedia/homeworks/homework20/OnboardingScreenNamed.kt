@@ -1,4 +1,4 @@
-package org.wikipedia.homeworks.homeworks20
+package org.wikipedia.homeworks.homework20
 
 import io.github.kakaocup.kakao.text.KButton
 import org.wikipedia.R
